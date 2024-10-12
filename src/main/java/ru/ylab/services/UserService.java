@@ -1,8 +1,10 @@
 package ru.ylab.services;
 
+
+import lombok.RequiredArgsConstructor;
 import ru.ylab.model.User;
 import ru.ylab.repository.UserRepository;
-
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository repository = new UserRepository();
 

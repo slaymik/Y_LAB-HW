@@ -104,4 +104,8 @@ public class UserRepository {
         String passwordRegex = ".{8,}$";
         return password.matches(passwordRegex);
     }
+
+    public void clear(){
+        users.clear();
+    }
 }

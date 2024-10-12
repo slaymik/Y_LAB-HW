@@ -11,13 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.ylab.Consts.FrequencyConsts.DAYS_IN_WEEK;
-
 public class HabitService {
 
     private final HabitRepository habitRepository = new HabitRepository();
 
-    public void createHabit(Habit habitData) {
-        habitRepository.createHabit(habitData);
+    public Habit createHabit(Habit habitData) {
+      return  habitRepository.createHabit(habitData);
     }
 
     public void editHabit(Habit habitData) {

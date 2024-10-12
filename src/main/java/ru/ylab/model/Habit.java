@@ -1,9 +1,6 @@
 package ru.ylab.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -14,6 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
+@NoArgsConstructor
 public class Habit {
     private int id;
     private User user;

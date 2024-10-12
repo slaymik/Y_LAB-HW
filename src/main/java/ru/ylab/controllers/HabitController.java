@@ -42,7 +42,7 @@ public class HabitController {
         }
     }
 
-    private void createHabitMenu(User currentUser, TextOutput output, TextInput input) {
+    public void createHabitMenu(User currentUser, TextOutput output, TextInput input) {
         output.println("");
         output.print("Введите название: ");
         String name = input.nextLine();
@@ -59,7 +59,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void habitTrackingMenu(User currentUser, TextOutput output, TextInput input) {
+    public void habitTrackingMenu(User currentUser, TextOutput output, TextInput input) {
         output.println("");
         output.println("1. Отметить выполнение привычки");
         output.println("2. Просмотреть историю выполнения");
@@ -83,7 +83,7 @@ public class HabitController {
         }
     }
 
-    private void markHabitAsCompletedMenu(User currentUser, TextOutput output, TextInput input) {
+    public void markHabitAsCompletedMenu(User currentUser, TextOutput output, TextInput input) {
         printAllHabits(currentUser, output);
         output.print("Введите id привычки: ");
         int id = input.nextInt();
@@ -92,7 +92,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void viewHabitHistoryMenu(User currentUser, TextOutput output, TextInput input) {
+    public void viewHabitHistoryMenu(User currentUser, TextOutput output, TextInput input) {
         printAllHabits(currentUser, output);
         output.print("Введите id привычки: ");
         int id = input.nextInt();
@@ -101,7 +101,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void viewFilteredHabitHistoryMenu(User currentUser, TextOutput output, TextInput input) {
+    public void viewFilteredHabitHistoryMenu(User currentUser, TextOutput output, TextInput input) {
         output.println("Выберите фильтр: ");
         output.println("1. По статусу");
         output.println("2. По дате создания");
@@ -127,7 +127,7 @@ public class HabitController {
         }
     }
 
-    private void editHabitMenu(User currentUser, TextOutput output, TextInput input) {
+    public void editHabitMenu(User currentUser, TextOutput output, TextInput input) {
         printAllHabits(currentUser, output);
         output.print("Введите id привычки: ");
         int id = input.nextInt();
@@ -149,7 +149,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void deleteHabitMenu(User currentUser, TextOutput output, TextInput input) {
+    public void deleteHabitMenu(User currentUser, TextOutput output, TextInput input) {
         printAllHabits(currentUser, output);
         output.print("Введите id привычки: ");
         int id = input.nextInt();
@@ -160,7 +160,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void statisticsMenu(User currentUser, TextOutput output, TextInput input) {
+    public void statisticsMenu(User currentUser, TextOutput output, TextInput input) {
         output.println("Статистика и аналитика:");
         output.println("1. Подсчет текущих серий выполнения привычек");
         output.println("2. Процент успешного выполнения привычек за определенный период");
@@ -182,7 +182,7 @@ public class HabitController {
         }
     }
 
-    private void calculateStreakMenu(User currentUser, TextOutput output, TextInput input) {
+    public void calculateStreakMenu(User currentUser, TextOutput output, TextInput input) {
         List<Habit> habits = habitService.getAllHabits(currentUser);
         for (Habit habit : habits) {
             output.println("Привычка: " + habit.getName() + ", Серия: " + habit.getStreak());
@@ -191,7 +191,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void calculateSuccessRateMenu(User currentUser, TextOutput output, TextInput input) {
+    public void calculateSuccessRateMenu(User currentUser, TextOutput output, TextInput input) {
         printAllHabits(currentUser, output);
         output.print("Введите id привычки: ");
         int id = input.nextInt();
@@ -204,7 +204,7 @@ public class HabitController {
         habitMenu(currentUser, output, input);
     }
 
-    private void generateReportMenu(User currentUser, TextOutput output, TextInput input) {
+    public void generateReportMenu(User currentUser, TextOutput output, TextInput input) {
         List<Habit> habits = habitService.getAllHabits(currentUser);
         for (Habit habit : habits) {
             output.println("Привычка: " + habit.getName() + ", Прогресс: " + habit.getStreak());

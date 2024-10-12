@@ -1,9 +1,10 @@
 package ru.ylab.services;
 
+import lombok.AllArgsConstructor;
 import ru.ylab.model.Admin;
 import ru.ylab.repository.AdminRepository;
 import ru.ylab.repository.UserRepository;
-
+@AllArgsConstructor
 public class AdminService {
     private final AdminRepository adminRepository =  new AdminRepository();
     private final UserRepository userRepository = new UserRepository();

@@ -16,7 +16,7 @@ public class HabitRepository {
     private static final Map<Integer, Habit> habits = new HashMap<>();
     private static int iterator = 1;
 
-    public void createHabit(Habit habitData) {
+    public Habit createHabit(Habit habitData) {
         habitData = Habit.builder()
                 .id(iterator)
                 .user(habitData.getUser())
@@ -28,6 +28,7 @@ public class HabitRepository {
         habitData.setActions(createHabitActionsBasedOnFrequency(habitData));
         habits.put(iterator, habitData);
         iterator++;
+        return habitData;
     }
 
     public void editHabit(Habit habitData) {
@@ -102,5 +103,9 @@ public class HabitRepository {
             }
         }
         return actions;
+    }
+    public void clear() {
+        habits.clear();
+        iterator = 1;
     }
 }
