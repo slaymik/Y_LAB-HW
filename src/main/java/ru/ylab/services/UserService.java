@@ -6,8 +6,8 @@ import ru.ylab.repository.UserRepository;
 public class UserService {
     private final UserRepository repository = new UserRepository();
 
-    public void registerUser(String email, String password, String name) {
-        repository.registerUser(email, password, name);
+    public User registerUser(String email, String password, String name) {
+        return repository.registerUser(email, password, name);
     }
 
     public User loginUser(String email, String password) {
@@ -26,7 +26,7 @@ public class UserService {
         repository.resetPassword(email, oldPassword, newPassword);
     }
 
-    public User getUser(String email){
+    public User getUser(String email) {
         return repository.getUser(email);
     }
 }

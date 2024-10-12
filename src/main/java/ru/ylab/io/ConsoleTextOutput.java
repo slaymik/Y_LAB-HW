@@ -1,6 +1,6 @@
 package ru.ylab.io;
 
-public class ConsoleTextOutput implements TextOutput{
+public class ConsoleTextOutput implements TextOutput {
     @Override
     public void printf(String format, Object... args) {
         System.out.printf(format, args);

@@ -2,7 +2,6 @@ package ru.ylab.repository;
 
 import ru.ylab.model.Habit;
 import ru.ylab.model.HabitAction;
-import ru.ylab.model.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,38 +9,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static ru.ylab.Consts.FrequencyConsts.DAYS_IN_WEEK;
+
 
 public class HabitRepository {
     private static final Map<Integer, Habit> habits = new HashMap<>();
-    private final UserRepository userRepository = new UserRepository();
     private static int iterator = 1;
-    private static final long DAYS_IN_WEEK = 7L;
 
-    public void createHabit(User user, Habit habit) {
-        habit = Habit.builder()
-                .id(iterator++)
-                .user(user)
-                .name(habit.getName())
-                .description(habit.getDescription())
-                .frequency(habit.getFrequency())
-                .duration(habit.getDuration())
+    public void createHabit(Habit habitData) {
+        habitData = Habit.builder()
+                .id(iterator)
+                .user(habitData.getUser())
+                .name(habitData.getName())
+                .description(habitData.getDescription())
+                .frequency(habitData.getFrequency())
+                .duration(habitData.getDuration())
                 .build();
-        habit.setActions(createHabitActionsBasedOnFrequency(habit));
-        habits.put(iterator, habit);
+        habitData.setActions(createHabitActionsBasedOnFrequency(habitData));
+        habits.put(iterator, habitData);
+        iterator++;
     }
 
-    public void updateHabit(Habit habitData) {
+    public void editHabit(Habit habitData) {
         if (!habits.containsKey(habitData.getId())) {
             throw new IllegalArgumentException("Привычка с таким id не существует");
         }
         Habit habit = habits.get(habitData.getId());
         if (habit != null) {
-            habit.setName(habitData.getName());
-            habit.setDescription(habitData.getDescription());
-            if (habit.getDuration() != habitData.getDuration() && habit.getFrequency() != habitData.getFrequency()) {
+            habit.setName(habitData.getName() != null && !habitData.getName().isBlank() ? habitData.getName() : habit.getName());
+            habit.setDescription(habitData.getDescription() != null && !habitData.getDescription().isBlank() ? habitData.getDescription() : habit.getDescription());
+            if (habit.getDuration() != habitData.getDuration() || habit.getFrequency() != habitData.getFrequency()) {
                 habit.setFrequency(habitData.getFrequency());
-                habit.setDuration(habitData.getDuration());
+                habit.setDuration(habitData.getDuration() != 0 ? habitData.getDuration() : habit.getDuration());
                 habit.setActions(createHabitActionsBasedOnFrequency(habit));
+                habit.setStreak(0);
             }
         }
     }

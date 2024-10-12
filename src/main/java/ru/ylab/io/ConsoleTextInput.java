@@ -2,7 +2,7 @@ package ru.ylab.io;
 
 import java.util.Scanner;
 
-public class ConsoleTextInput implements TextInput{
+public class ConsoleTextInput implements TextInput {
     private final Scanner scanner;
 
     public ConsoleTextInput() {

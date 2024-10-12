@@ -5,12 +5,13 @@ import lombok.NoArgsConstructor;
 import ru.ylab.model.Habit;
 import ru.ylab.model.HabitAction;
 
-import java.util.Comparator;
+import java.time.LocalDate;
 import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageFactory {
 
-    public static String habitHistoryMessage(Habit habit){
+    public static String habitHistoryMessage(Habit habit) {
         StringBuilder builder = new StringBuilder();
         builder.append("Название: %s \n".formatted(habit.getName()));
         builder.append("Описание: %s \n".formatted(habit.getDescription()));
@@ -49,20 +50,21 @@ public class MessageFactory {
         return builder.toString();
     }
 
-    public static String filteredHabitActionsMessage(String filter, List<HabitAction> actions) {
+    public static String filteredHabitActionsMessage(LocalDate filterDate, Boolean filterStatus, List<HabitAction> actions) {
         StringBuilder builder = new StringBuilder();
 
-        switch (filter) {
-            case "Дате создания":
-                actions.stream()
-                        .sorted(Comparator.comparing(HabitAction::getActionDate))
-                        .map(HabitAction::toString)
-                        .forEach(builder::append);
-            case "Статусу":
-                actions.stream()
-                        .sorted(Comparator.comparing(HabitAction::isCompleted))
-                        .map(HabitAction::toString)
-                        .forEach(builder::append);
+        if (filterDate != null && filterStatus != null) {
+            actions.stream()
+                    .filter(action -> action.getActionDate().equals(filterDate) && action.isCompleted() == filterStatus)
+                    .forEach(action -> builder.append(action).append("\n"));
+        } else if (filterDate != null) {
+            actions.stream()
+                    .filter(action -> action.getActionDate().equals(filterDate))
+                    .forEach(action -> builder.append(action).append("\n"));
+        } else if (filterStatus != null) {
+            actions.stream()
+                    .filter(action -> action.isCompleted() == filterStatus)
+                    .forEach(action -> builder.append(action).append("\n"));
         }
         return builder.toString();
     }

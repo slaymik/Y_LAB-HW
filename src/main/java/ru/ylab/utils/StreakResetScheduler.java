@@ -10,7 +10,7 @@ public class StreakResetScheduler {
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private final HabitRepository repository = new HabitRepository();
 
-    public void startScheduler(){
-        scheduler.scheduleAtFixedRate(repository::resetStreaks, 0 , 1, TimeUnit.DAYS);
+    public void startScheduler() {
+        scheduler.scheduleAtFixedRate(repository::resetStreaks, 0, 1, TimeUnit.DAYS);
     }
 }

@@ -35,7 +35,7 @@ public class Habit {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 .withZone(ZoneId.systemDefault());
         return String.format("ID: %d, Пользователь: %s, Название: %s, Описание: %s, Частота: %s, Длительность: %d, Серия: %d, Дата создания: %s, Запланированное количество выполнений: %d",
-                id, user, name, description, frequency, duration, streak, formatter.format(createTimestamp), actions.size());
+                id, user.getName(), name, description, frequency, duration, streak, formatter.format(createTimestamp), actions.size());
     }
 
     public enum Frequency {
